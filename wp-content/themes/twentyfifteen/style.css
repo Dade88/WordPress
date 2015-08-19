@@ -1,10 +1,10 @@
 /*
 Theme Name: Twenty Fifteen
-Theme URI: https://wordpress.org/themes/twentyfifteen
+Theme URI: https://wordpress.org/themes/twentyfifteen/
 Author: the WordPress team
 Author URI: https://wordpress.org/
 Description: Our 2015 default theme is clean, blog-focused, and designed for clarity. Twenty Fifteen's simple, straightforward typography is readable on a wide variety of screen sizes, and suitable for multiple languages. We designed it using a mobile-first approach, meaning your content takes center-stage, regardless of whether your visitors arrive by smartphone, tablet, laptop, or desktop computer.
-Version: 1.0
+Version: 1.3
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: black, blue, gray, pink, purple, white, yellow, dark, light, two-columns, left-sidebar, fixed-layout, responsive-layout, accessibility-ready, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, threaded-comments, translation-ready
@@ -55,10 +55,8 @@ Use it to make something cool, have fun, and share what you've learned with othe
 /**
  * 1.0 - Reset
  *
- * Resetting and rebuilding styles have been helped along thanks to the fine work of
- * Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
- * along with Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
- * and Blueprint http://www.blueprintcss.org/
+ * Resetting and rebuilding styles have been helped along thanks to the fine
+ * work of Eric Meyer, Nicolas Gallagher, Jonathan Neal, and Blueprint.
  */
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
@@ -492,6 +490,10 @@ textarea {
 
 button,
 input {
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
 	line-height: normal;
 }
 
@@ -682,9 +684,8 @@ a:focus {
 	position: relative;
 }
 
-.main-navigation .current_page_item > a,
 .main-navigation .current-menu-item > a,
-.main-navigation .current_page_ancestor > a {
+.main-navigation .current-menu-ancestor > a {
 	font-weight: 700;
 }
 
@@ -693,7 +694,6 @@ a:focus {
 	border-top: 0;
 }
 
-.main-navigation .page_item_has_children > a,
 .main-navigation .menu-item-has-children > a {
 	padding-right: 48px;
 }
@@ -781,10 +781,6 @@ a:focus {
 	position: absolute;
 	top: 0;
 	left: 0;
-}
-
-.social-navigation a[href$="/feed/"]:before {
-	content: "\f413";
 }
 
 .social-navigation a[href*="codepen.io"]:before {
@@ -882,6 +878,18 @@ a:focus {
 
 .social-navigation a[href*="twitch.tv"]:before {
 	content: "\f516";
+}
+
+.social-navigation a[href$="/feed/"]:before {
+	content: "\f413";
+}
+
+.social-navigation a[href*="path.com"]:before {
+	content: "\f219";
+}
+
+.social-navigation a[href*="skype.com"]:before {
+	content: "\f220";
 }
 
 .secondary-toggle {
@@ -2959,11 +2967,6 @@ p > video {
 		margin-left: 1em;
 	}
 
-	.main-navigation .page_item_has_children > a,
-	.main-navigation .main-navigation .menu-item-has-children > a {
-		padding-right: 54px;
-	}
-
 	.main-navigation .menu-item-description {
 		font-size: 14px;
 		font-size: 1.4rem;
@@ -3585,11 +3588,6 @@ p > video {
 		padding: 0.75em 0;
 	}
 
-	.main-navigation .page_item_has_children > a,
-	.main-navigation .main-navigation .menu-item-has-children > a {
-		padding-right: 53px;
-	}
-
 	.main-navigation .menu-item-description {
 		font-size: 16px;
 		font-size: 1.6rem;
@@ -4185,9 +4183,8 @@ p > video {
 		padding: 0.5em 0;
 	}
 
-	.main-navigation .page_item_has_children > a,
 	.main-navigation .menu-item-has-children > a {
-		padding-right: 35px;
+		padding-right: 30px;
 	}
 
 	.main-navigation .menu-item-description {
@@ -4845,9 +4842,8 @@ p > video {
 		padding: 0.4643em 0;
 	}
 
-	.main-navigation .page_item_has_children > a,
 	.main-navigation .menu-item-has-children > a {
-		padding-right: 33px;
+		padding-right: 34px;
 	}
 
 	.main-navigation .menu-item-description {
@@ -5384,9 +5380,8 @@ p > video {
 		padding: 0.5em 0;
 	}
 
-	.main-navigation .page_item_has_children > a,
 	.main-navigation .menu-item-has-children > a {
-		padding-right: 32px;
+		padding-right: 38px;
 	}
 
 	.main-navigation .menu-item-description {

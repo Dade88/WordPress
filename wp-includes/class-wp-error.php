@@ -144,7 +144,7 @@ class WP_Error {
 	 * @since 2.1.0
 	 *
 	 * @param string|int $code Optional. Error code.
-	 * @return mixed Null, if no errors.
+	 * @return mixed Error data, if it exists.
 	 */
 	public function get_error_data($code = '') {
 		if ( empty($code) )
@@ -152,7 +152,6 @@ class WP_Error {
 
 		if ( isset($this->error_data[$code]) )
 			return $this->error_data[$code];
-		return null;
 	}
 
 	/**
@@ -214,8 +213,6 @@ class WP_Error {
  * @param mixed $thing Check if unknown variable is a WP_Error object.
  * @return bool True, if WP_Error. False, if not WP_Error.
  */
-function is_wp_error($thing) {
-	if ( is_object($thing) && is_a($thing, 'WP_Error') )
-		return true;
-	return false;
+function is_wp_error( $thing ) {
+	return ( $thing instanceof WP_Error );
 }

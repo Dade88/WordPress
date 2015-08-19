@@ -32,6 +32,8 @@ if ( ! ( isset( $_REQUEST['action'] ) && 'upload-attachment' == $_REQUEST['actio
 
 require_once( ABSPATH . 'wp-admin/admin.php' );
 
+header( 'Content-Type: text/html; charset=' . get_option( 'blog_charset' ) );
+
 if ( isset( $_REQUEST['action'] ) && 'upload-attachment' === $_REQUEST['action'] ) {
 	include( ABSPATH . 'wp-admin/includes/ajax-actions.php' );
 
@@ -46,8 +48,6 @@ if ( ! current_user_can( 'upload_files' ) ) {
 	wp_die( __( 'You do not have permission to upload files.' ) );
 }
 
-header( 'Content-Type: text/html; charset=' . get_option( 'blog_charset' ) );
-
 // just fetch the detail form for that attachment
 if ( isset($_REQUEST['attachment_id']) && ($id = intval($_REQUEST['attachment_id'])) && $_REQUEST['fetch'] ) {
 	$post = get_post( $id );
@@ -61,7 +61,7 @@ if ( isset($_REQUEST['attachment_id']) && ($id = intval($_REQUEST['attachment_id
 			if ( $thumb_url = wp_get_attachment_image_src( $id, 'thumbnail', true ) )
 				echo '<img class="pinkynail" src="' . esc_url( $thumb_url[0] ) . '" alt="" />';
 			echo '<a class="edit-attachment" href="' . esc_url( get_edit_post_link( $id ) ) . '" target="_blank">' . _x( 'Edit', 'media item' ) . '</a>';
-			$title = $post->post_title ? $post->post_title : wp_basename( $post->guid ); // title shouldn't ever be empty, but use filename just in cas.e
+			$title = $post->post_title ? $post->post_title : wp_basename( $post->guid ); // Title shouldn't ever be empty, but use filename just in case.
 			echo '<div class="filename new"><span class="title">' . esc_html( wp_html_excerpt( $title, 60, '&hellip;' ) ) . '</span></div>';
 			break;
 		case 2 :

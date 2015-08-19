@@ -93,7 +93,7 @@ class Custom_Background {
 
 		get_current_screen()->set_help_sidebar(
 			'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-			'<p>' . __( '<a href="http://codex.wordpress.org/Appearance_Background_Screen" target="_blank">Documentation on Custom Background</a>' ) . '</p>' .
+			'<p>' . __( '<a href="https://codex.wordpress.org/Appearance_Background_Screen" target="_blank">Documentation on Custom Background</a>' ) . '</p>' .
 			'<p>' . __( '<a href="https://wordpress.org/support/" target="_blank">Support Forums</a>' ) . '</p>'
 		);
 
@@ -108,7 +108,6 @@ class Custom_Background {
 	 * @since 3.0.0
 	 */
 	public function take_action() {
-
 		if ( empty($_POST) )
 			return;
 
@@ -177,7 +176,7 @@ class Custom_Background {
 	public function admin_page() {
 ?>
 <div class="wrap" id="custom-background">
-<h2><?php _e( 'Custom Background' ); ?></h2>
+<h1><?php _e( 'Custom Background' ); ?></h1>
 
 <?php if ( current_user_can( 'customize' ) ) { ?>
 <div class="notice notice-info hide-if-no-customize">
@@ -237,7 +236,7 @@ class Custom_Background {
 <tr>
 <th scope="row"><?php _e('Remove Image'); ?></th>
 <td>
-<form method="post" action="">
+<form method="post">
 <?php wp_nonce_field('custom-background-remove', '_wpnonce-custom-background-remove'); ?>
 <?php submit_button( __( 'Remove Background Image' ), 'button', 'remove-background', false ); ?><br/>
 <?php _e('This will remove the background image. You will not be able to restore any customizations.') ?>
@@ -251,7 +250,7 @@ class Custom_Background {
 <tr>
 <th scope="row"><?php _e('Restore Original Image'); ?></th>
 <td>
-<form method="post" action="">
+<form method="post">
 <?php wp_nonce_field('custom-background-reset', '_wpnonce-custom-background-reset'); ?>
 <?php submit_button( __( 'Restore Original Image' ), 'button', 'reset-background', false ); ?><br/>
 <?php _e('This will restore the original background image. You will not be able to restore any customizations.') ?>
@@ -260,9 +259,10 @@ class Custom_Background {
 </tr>
 <?php endif; ?>
 
+<?php if ( current_user_can( 'upload_files' ) ): ?>
 <tr>
 <th scope="row"><?php _e('Select Image'); ?></th>
-<td><form enctype="multipart/form-data" id="upload-form" class="wp-upload-form" method="post" action="">
+<td><form enctype="multipart/form-data" id="upload-form" class="wp-upload-form" method="post">
 	<p>
 		<label for="upload"><?php _e( 'Choose an image from your computer:' ); ?></label><br />
 		<input type="file" id="upload" name="import" />
@@ -279,11 +279,12 @@ class Custom_Background {
 	</form>
 </td>
 </tr>
+<?php endif; ?>
 </tbody>
 </table>
 
 <h3><?php _e('Display Options') ?></h3>
-<form method="post" action="">
+<form method="post">
 <table class="form-table">
 <tbody>
 <?php if ( get_background_image() ) : ?>
@@ -357,7 +358,6 @@ if ( current_theme_supports( 'custom-background', 'default-color' ) )
 	 * @since 3.0.0
 	 */
 	public function handle_upload() {
-
 		if ( empty($_FILES) )
 			return;
 
@@ -434,6 +434,9 @@ if ( current_theme_supports( 'custom-background', 'default-color' ) )
 	 *
 	 * @since 3.4.0
 	 * @deprecated 3.5.0
+	 *
+	 * @param array $form_fields
+	 * @return array $form_fields
 	 */
 	public function attachment_fields_to_edit( $form_fields ) {
 		return $form_fields;
@@ -443,6 +446,9 @@ if ( current_theme_supports( 'custom-background', 'default-color' ) )
 	 *
 	 * @since 3.4.0
 	 * @deprecated 3.5.0
+	 *
+	 * @param array $tabs
+	 * @return array $tabs
 	 */
 	public function filter_upload_tabs( $tabs ) {
 		return $tabs;

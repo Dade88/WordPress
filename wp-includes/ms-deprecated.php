@@ -194,20 +194,23 @@ function get_most_active_blogs( $num = 10, $display = true ) {
 	$blogs = get_blog_list( 0, 'all', false ); // $blog_id -> $details
 	if ( is_array( $blogs ) ) {
 		reset( $blogs );
+		$most_active = array();
+		$blog_list = array();
 		foreach ( (array) $blogs as $key => $details ) {
 			$most_active[ $details['blog_id'] ] = $details['postcount'];
 			$blog_list[ $details['blog_id'] ] = $details; // array_slice() removes keys!!
 		}
 		arsort( $most_active );
 		reset( $most_active );
-		foreach ( (array) $most_active as $key => $details )
+		$t = array();
+		foreach ( (array) $most_active as $key => $details ) {
 			$t[ $key ] = $blog_list[ $key ];
-
+		}
 		unset( $most_active );
 		$most_active = $t;
 	}
 
-	if ( $display == true ) {
+	if ( $display ) {
 		if ( is_array( $most_active ) ) {
 			reset( $most_active );
 			foreach ( (array) $most_active as $key => $details ) {
@@ -250,7 +253,7 @@ function wpmu_admin_do_redirect( $url = '' ) {
 		wp_redirect( $ref );
 		exit();
 	}
-	if ( empty( $_SERVER['HTTP_REFERER'] ) == false ) {
+	if ( ! empty( $_SERVER['HTTP_REFERER'] ) ) {
 		wp_redirect( $_SERVER['HTTP_REFERER'] );
 		exit();
 	}
